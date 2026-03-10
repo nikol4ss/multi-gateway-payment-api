@@ -1,0 +1,65 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: betalent_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - '3306:3306'
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - betalent_network
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-u', 'root', '-p${DB_ROOT_PASSWORD}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: ${APP_ENV:-development}
+    container_name: betalent_app
+    restart: unless-stopped
+    ports:
+      - '${PORT:-3333}:3333'
+    env_file:
+      - .env
+    environment:
+      DB_HOST: mysql
+    volumes:
+      - .:/app
+      - /app/node_modules
+    networks:
+      - betalent_network
+    depends_on:
+      mysql:
+        condition: service_healthy
+    command: node ace serve --watch
+
+  gateways:
+    image: matheusprotzen/gateways-mock
+    container_name: betalent_gateways
+    restart: unless-stopped
+    ports:
+      - '3001:3001'
+      - '3002:3002'
+    environment:
+      REMOVE_AUTH: ${GATEWAY_REMOVE_AUTH:-false}
+    networks:
+      - betalent_network
+
+volumes:
+  mysql_data:
+    driver: local
+
+networks:
+  betalent_network:
+    driver: bridge
