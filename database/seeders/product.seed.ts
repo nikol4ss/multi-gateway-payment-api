@@ -1,4 +1,4 @@
-import Product from '#models/product'
+import Product from '#models/product.model'
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
 
 export default class ProductSeeder extends BaseSeeder {

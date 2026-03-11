@@ -1,7 +1,7 @@
 import { BaseModel, column, manyToMany } from '@adonisjs/lucid/orm'
 import type { ManyToMany } from '@adonisjs/lucid/types/relations'
 
-import Transaction from '#models/transaction'
+import Transaction from '#models/transaction.model'
 
 import { DateTime } from 'luxon'
 

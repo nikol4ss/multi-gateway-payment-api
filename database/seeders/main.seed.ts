@@ -1,9 +1,9 @@
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
 import { type QueryClientContract } from '@adonisjs/lucid/types/database'
 
-import GatewaySeeder from './gateway_seed.js'
-import ProductSeeder from './product_seed.js'
-import UserSeeder from './user_seed.js'
+import GatewaySeeder from './gateway.seed.ts'
+import ProductSeeder from './product.seed.ts'
+import UserSeeder from './user.seed.ts'
 
 export default class MainSeeder extends BaseSeeder {
   private async seed(Seeder: { new (client: QueryClientContract): BaseSeeder }) {

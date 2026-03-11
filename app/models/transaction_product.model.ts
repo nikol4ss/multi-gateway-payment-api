@@ -1,5 +1,5 @@
-import Product from '#models/product'
-import Transaction from '#models/transaction'
+import Product from '#models/product.model'
+import Transaction from '#models/transaction.model'
 
 import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'

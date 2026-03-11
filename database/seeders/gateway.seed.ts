@@ -1,4 +1,4 @@
-import Gateway from '#models/gateway'
+import Gateway from '#models/gateway.model'
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
 
 export default class GatewaySeeder extends BaseSeeder {

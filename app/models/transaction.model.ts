@@ -1,6 +1,6 @@
-import Client from '#models/client'
-import Gateway from '#models/gateway'
-import Product from '#models/product'
+import Client from '#models/client.model'
+import Gateway from '#models/gateway.model'
+import Product from '#models/product.model'
 
 import { BaseModel, belongsTo, column, manyToMany } from '@adonisjs/lucid/orm'
 import type { BelongsTo, ManyToMany } from '@adonisjs/lucid/types/relations'

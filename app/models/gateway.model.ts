@@ -1,11 +1,11 @@
 import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
 import type { HasMany } from '@adonisjs/lucid/types/relations'
 
-import Transaction from '#models/transaction'
+import Transaction from '#models/transaction.model'
 
 import { DateTime } from 'luxon'
 
-export default class Client extends BaseModel {
+export default class Gateway extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
@@ -13,7 +13,10 @@ export default class Client extends BaseModel {
   declare name: string
 
   @column()
-  declare email: string
+  declare isActive: boolean
+
+  @column()
+  declare priority: number
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
