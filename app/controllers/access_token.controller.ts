@@ -4,8 +4,6 @@ import { loginValidator } from '#validators/user.validator'
 import type { HttpContext } from '@adonisjs/core/http'
 
 /**
- * Controller responsável por autenticação baseada em access tokens.
- *
  * Permite login por credenciais e logout revogando o token.
  */
 export default class AccessTokenController {
@@ -16,7 +14,7 @@ export default class AccessTokenController {
     const accessToken = await User.accessTokens.create(user)
 
     return serialize({
-      user: UserTransformer.transform(user),
+      user: new UserTransformer(user).toObject(),
       token: accessToken.value!.release(),
     })
   }
@@ -26,9 +24,6 @@ export default class AccessTokenController {
     if (user.currentAccessToken) {
       await User.accessTokens.delete(user, user.currentAccessToken.identifier)
     }
-
-    return {
-      message: 'Logged out',
-    }
+    return { message: 'Logged out' }
   }
 }

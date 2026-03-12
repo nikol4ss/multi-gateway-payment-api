@@ -4,8 +4,6 @@ import { signupValidator } from '#validators/user.validator'
 import type { HttpContext } from '@adonisjs/core/http'
 
 /**
- * Controller responsável pelo registro de novos usuários.
- *
  * Valida os dados e cria o usuário com access token.
  */
 export default class NewAccountController {
@@ -13,11 +11,11 @@ export default class NewAccountController {
     const { email, password } = await request.validateUsing(signupValidator)
 
     const user = await User.create({ email, password })
-    const accesstoken = await User.accessTokens.create(user)
+    const accessToken = await User.accessTokens.create(user)
 
     return serialize({
-      user: UserTransformer.transform(user),
-      token: accesstoken.value!.release(),
+      user: new UserTransformer(user).toObject(),
+      token: accessToken.value!.release(),
     })
   }
 }
