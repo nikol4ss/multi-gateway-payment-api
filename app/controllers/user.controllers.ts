@@ -1,5 +1,6 @@
 import UserService from '#services/user.service'
 import UserTransformer from '#transformers/user.transformer'
+import { createUserValidator, updateUserValidator } from '#validators/user.validator'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class UserController {
@@ -16,13 +17,13 @@ export default class UserController {
   }
 
   async store({ request, response }: HttpContext) {
-    const data = request.only(['email', 'password', 'role'])
+    const data = await request.validateUsing(createUserValidator)
     const user = await this.userService.create(data)
     return response.created({ data: new UserTransformer(user).toObject() })
   }
 
   async update({ params, request, response }: HttpContext) {
-    const data = request.only(['email', 'password', 'role'])
+    const data = await request.validateUsing(updateUserValidator)
     const user = await this.userService.update(params.id, data)
     return response.ok({ data: new UserTransformer(user).toObject() })
   }

@@ -1,5 +1,6 @@
 import ProductService from '#services/product.service'
 import ProductTransformer from '#transformers/product.transformer'
+import { createProductValidator, updateProductValidator } from '#validators/product.validator'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class ProductController {
@@ -16,13 +17,13 @@ export default class ProductController {
   }
 
   async store({ request, response }: HttpContext) {
-    const data = request.only(['name', 'amount'])
+    const data = await request.validateUsing(createProductValidator)
     const product = await this.productService.create(data)
     return response.created({ data: new ProductTransformer(product).toObject() })
   }
 
   async update({ params, request, response }: HttpContext) {
-    const data = request.only(['name', 'amount'])
+    const data = await request.validateUsing(updateProductValidator)
     const product = await this.productService.update(Number(params.id), data)
     return response.ok({ data: new ProductTransformer(product).toObject() })
   }

@@ -1,5 +1,6 @@
 import TransactionService from '#services/transaction.service'
 import TransactionTransformer from '#transformers/transaction.transformer'
+import { createTransactionValidator } from '#validators/transaction.validator'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class TransactionController {
@@ -16,7 +17,7 @@ export default class TransactionController {
   }
 
   async store({ request, response }: HttpContext) {
-    const data = request.only(['products', 'client', 'cardNumber', 'cvv'])
+    const data = await request.validateUsing(createTransactionValidator)
     const transaction = await this.transactionService.create(data)
     return response.created({ data: new TransactionTransformer(transaction).toObject() })
   }
