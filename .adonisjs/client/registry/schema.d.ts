@@ -9,7 +9,7 @@ export type ParamValue = string | number | bigint | boolean
 export interface Registry {
   'auth.new_account.store': {
     methods: ["POST"]
-    pattern: '/api/v1/auth/signup'
+    pattern: '/api/auth/signup'
     types: {
       body: ExtractBody<InferInput<(typeof import('#validators/user.validator').signupValidator)>>
       paramsTuple: []
@@ -21,7 +21,7 @@ export interface Registry {
   }
   'auth.access_token.store': {
     methods: ["POST"]
-    pattern: '/api/v1/auth/login'
+    pattern: '/api/auth/login'
     types: {
       body: ExtractBody<InferInput<(typeof import('#validators/user.validator').loginValidator)>>
       paramsTuple: []
@@ -31,21 +31,9 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/access_token.controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
-  'auth.access_token.destroy': {
-    methods: ["POST"]
-    pattern: '/api/v1/auth/logout'
-    types: {
-      body: {}
-      paramsTuple: []
-      params: {}
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/access_token.controller').default['destroy']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/access_token.controller').default['destroy']>>>
-    }
-  }
-  'profile.profile.show': {
+  'auth.profile.show': {
     methods: ["GET","HEAD"]
-    pattern: '/api/v1/account/profile'
+    pattern: '/api/auth/profile'
     types: {
       body: {}
       paramsTuple: []
@@ -53,6 +41,18 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/profile.controller').default['show']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/profile.controller').default['show']>>>
+    }
+  }
+  'auth.access_token.destroy': {
+    methods: ["DELETE"]
+    pattern: '/api/auth/logout'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/access_token.controller').default['destroy']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/access_token.controller').default['destroy']>>>
     }
   }
 }
