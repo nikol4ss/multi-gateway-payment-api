@@ -3,9 +3,6 @@ import UserTransformer from '#transformers/user.transformer'
 import { loginValidator } from '#validators/user.validator'
 import type { HttpContext } from '@adonisjs/core/http'
 
-/**
- * Permite login por credenciais e logout revogando o token.
- */
 export default class AccessTokenController {
   async store({ request, serialize }: HttpContext) {
     const { email, password } = await request.validateUsing(loginValidator)

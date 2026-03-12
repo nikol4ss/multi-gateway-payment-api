@@ -2,20 +2,16 @@ import ProductService from '#services/product.service'
 import ProductTransformer from '#transformers/product.transformer'
 import type { HttpContext } from '@adonisjs/core/http'
 
-/**
- * Gerencia o CRUD de produtos disponíveis para venda.
- * Listagem, criação, atualização e remoção de produtos.
- */
 export default class ProductController {
   private productService = new ProductService()
 
   async index({ response }: HttpContext) {
-    const products = await this.productService.findAll()
+    const products = await this.productService.readAll()
     return response.ok({ data: products.map((p) => new ProductTransformer(p).toObject()) })
   }
 
   async show({ params, response }: HttpContext) {
-    const product = await this.productService.findById(Number(params.id))
+    const product = await this.productService.readById(Number(params.id))
     return response.ok({ data: new ProductTransformer(product).toObject() })
   }
 

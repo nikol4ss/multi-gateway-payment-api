@@ -2,10 +2,6 @@ import Client from '#models/client.model'
 import ClientTransformer from '#transformers/client.transformer'
 import type { HttpContext } from '@adonisjs/core/http'
 
-/**
- * Permite listar todos os clientes e obter detalhes de um cliente específico,
- * incluindo suas transações, gateways e produtos relacionados.
- */
 export default class ClientController {
   async index({ response }: HttpContext) {
     const clients = await Client.query().orderBy('name', 'asc')
