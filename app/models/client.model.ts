@@ -1,8 +1,6 @@
+import Transaction from '#models/transaction.model'
 import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
 import type { HasMany } from '@adonisjs/lucid/types/relations'
-
-import Transaction from '#models/transaction.model'
-
 import { DateTime } from 'luxon'
 
 export default class Client extends BaseModel {
