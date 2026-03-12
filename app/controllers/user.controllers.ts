@@ -4,7 +4,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 
 /**
  * Gerencia o CRUD de usuários do sistema.
- * Apenas administradores e managers têm acesso a essas rotas.
+ * Listagem, criação, atualização e remoção de usuários.
  */
 export default class UserController {
   private userService = new UserService()

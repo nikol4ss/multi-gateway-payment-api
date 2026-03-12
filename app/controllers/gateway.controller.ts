@@ -10,6 +10,7 @@ export default class GatewayController {
   async toggle({ params, response }: HttpContext) {
     const gateway = await Gateway.findOrFail(params.id)
     gateway.isActive = !gateway.isActive
+
     await gateway.save()
     return response.ok({ data: new GatewayTransformer(gateway).toObject() })
   }
@@ -18,6 +19,7 @@ export default class GatewayController {
     const { priority } = request.only(['priority'])
     const gateway = await Gateway.findOrFail(params.id)
     gateway.priority = priority
+
     await gateway.save()
     return response.ok({ data: new GatewayTransformer(gateway).toObject() })
   }

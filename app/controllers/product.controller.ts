@@ -4,6 +4,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 
 /**
  * Gerencia o CRUD de produtos disponíveis para venda.
+ * Listagem, criação, atualização e remoção de produtos.
  */
 export default class ProductController {
   private productService = new ProductService()
