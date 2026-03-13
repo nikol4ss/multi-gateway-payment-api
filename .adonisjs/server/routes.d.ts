@@ -4,7 +4,7 @@ type ParamValue = string | number | bigint | boolean
 
 export type ScannedRoutes = {
   ALL: {
-    'auth.user.store': { paramsTuple?: []; params?: {} }
+    'auth.new_account.store': { paramsTuple?: []; params?: {} }
     'auth.access_token.store': { paramsTuple?: []; params?: {} }
     'auth.profile.show': { paramsTuple?: []; params?: {} }
     'auth.access_token.destroy': { paramsTuple?: []; params?: {} }
@@ -50,7 +50,7 @@ export type ScannedRoutes = {
     'transaction.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   POST: {
-    'auth.user.store': { paramsTuple?: []; params?: {} }
+    'auth.new_account.store': { paramsTuple?: []; params?: {} }
     'auth.access_token.store': { paramsTuple?: []; params?: {} }
     'transaction.store': { paramsTuple?: []; params?: {} }
     'user.store': { paramsTuple?: []; params?: {} }

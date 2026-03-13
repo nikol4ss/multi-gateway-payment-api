@@ -3,8 +3,8 @@ import type { routes } from './index.ts'
 
 export interface ApiDefinition {
   auth: {
-    user: {
-      store: typeof routes['auth.user.store']
+    newAccount: {
+      store: typeof routes['auth.new_account.store']
     }
     accessToken: {
       store: typeof routes['auth.access_token.store']

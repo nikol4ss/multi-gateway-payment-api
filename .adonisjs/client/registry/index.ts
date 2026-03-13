@@ -6,11 +6,11 @@ import type { ApiDefinition } from './tree.d.ts'
 const placeholder: any = {}
 
 const routes = {
-  'auth.user.store': {
+  'auth.new_account.store': {
     methods: ["POST"],
     pattern: '/api/auth/signup',
     tokens: [{"old":"/api/auth/signup","type":0,"val":"api","end":""},{"old":"/api/auth/signup","type":0,"val":"auth","end":""},{"old":"/api/auth/signup","type":0,"val":"signup","end":""}],
-    types: placeholder as Registry['auth.user.store']['types'],
+    types: placeholder as Registry['auth.new_account.store']['types'],
   },
   'auth.access_token.store': {
     methods: ["POST"],
