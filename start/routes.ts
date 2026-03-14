@@ -28,7 +28,7 @@ router
         router.patch('gateways/:id/priority', [controllers.Gateway, 'priority'])
 
         router.get('users', [controllers.User, 'index'])
-        router.get('users/:id', [controllers.User, 'show'])``
+        router.get('users/:id', [controllers.User, 'show'])
         router.post('users', [controllers.User, 'store'])
         router.put('users/:id', [controllers.User, 'update'])
         router.delete('users/:id', [controllers.User, 'destroy'])

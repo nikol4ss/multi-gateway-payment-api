@@ -13,7 +13,7 @@ export default class GatewayOneService implements GatewayInterface {
   private bearerToken: string = ''
 
   private async authenticate(): Promise<void> {
-    const response = await fetch(`${this.baseUrl}/gateway/login`, {
+    const response = await fetch(`${this.baseUrl}/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -33,7 +33,7 @@ export default class GatewayOneService implements GatewayInterface {
   async charge(data: ChargeDto): Promise<ChargeResponse> {
     await this.authenticate()
 
-    const response = await fetch(`${this.baseUrl}/gateway/transactions`, {
+    const response = await fetch(`${this.baseUrl}/transactions`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -54,6 +54,7 @@ export default class GatewayOneService implements GatewayInterface {
 
     const result = (await response.json()) as GatewayOneChargeResponse
 
+    console.log('Gateway 1 response: ', JSON.stringify(result))
     return {
       externalId: result.id,
       status: result.status,
@@ -64,7 +65,7 @@ export default class GatewayOneService implements GatewayInterface {
   async refund(externalId: string): Promise<void> {
     await this.authenticate()
 
-    const response = await fetch(`${this.baseUrl}/gateway/transactions/${externalId}/charge_back`, {
+    const response = await fetch(`${this.baseUrl}/transactions/${externalId}/charge_back`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${this.bearerToken}`,

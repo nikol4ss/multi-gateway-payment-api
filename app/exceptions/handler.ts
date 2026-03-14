@@ -31,6 +31,10 @@ export default class HttpExceptionHandler extends ExceptionHandler {
       })
     }
 
+    if (error instanceof Error && error.message.includes('gateways_priority_unique')) {
+      return ctx.response.conflict({ message: 'Priority already in use' })
+    }
+
     // 403 — sem permissão
     if (error instanceof Error && error.message === 'Access denied') {
       return ctx.response.forbidden({ message: 'Access denied' })
