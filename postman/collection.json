@@ -1,0 +1,924 @@
+{
+  "info": {
+    "_postman_id": "9c441f93-f912-4330-b209-194eb24bb151",
+    "name": "multi-gateway-payment-api",
+    "description": "Multi-Gateway Payment API — BeTalent\n\nAPI RESTful de pagamentos com múltiplos gateways e fallback automático por prioridade. Inclui autenticação via Bearer token, controle de acesso por roles (ADMIN, MANAGER, FINANCE, USER), CRUD de produtos e usuários, e reembolso de transações pelo gateway de origem.\n\n<img src=\"https://content.pstmn.io/67d30f81-5041-4391-96b1-7f6279f42ac2/ZGlhZ3JhbS5wbmc=\">\n\nBase URL: [http://localhost:3333/api](http://localhost:3333/api)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "43306273"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "auth/signup",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "name": "cookie",
+                "sortOrder": 1,
+                "infoTitle": "This header was automatically added",
+                "info": "The Cookie header is added to send the cookies that are associated with this endpoint.\n\nUse the cookie manager to remove the header or to change the value.",
+                "allowedToToggle": false,
+                "disableEdit": true,
+                "previewSettingsLink": "Go to cookies",
+                "key": "Cookie",
+                "value": "adonis-session=s%3AeyJtZXNzYWdlIjoiMThhNzI3NzctNzllNC00NjEwLTkzMmUtYWVjYTU5MzY4NzliIiwicHVycG9zZSI6ImFkb25pcy1zZXNzaW9uIn0.5KPqIjV6_rsUfdZUI3-1z-b7ZoJK8QReV7X6yvLznDg",
+                "system": true,
+                "type": "text",
+                "id": 0
+              },
+              {
+                "name": "cache-control",
+                "sortOrder": 2,
+                "infoTitle": "We recommend using this header",
+                "info": "Postman added \"Cache-Control: no-cache\" as a precautionary measure to prevent the server from returning stale response when one makes repeated requests.\n\nYou can remove this header in the app settings or enter a new one with a different value.",
+                "allowedToToggle": false,
+                "disableEdit": true,
+                "previewSettingsLink": "Go to settings",
+                "key": "Cache-Control",
+                "value": "no-cache",
+                "system": true,
+                "type": "text",
+                "id": 1
+              },
+              {
+                "name": "postman-token",
+                "sortOrder": 3,
+                "infoTitle": "We recommend using this header",
+                "info": "The Postman-Token header appends a random UUID to every outgoing request. Postman adds this header for API developers to better debug requests sent and to ensure separate requests appear distinct to the receiving server.\n\nYou can remove this header in the app settings.",
+                "allowedToToggle": false,
+                "disableEdit": true,
+                "previewSettingsLink": "Go to settings",
+                "key": "Postman-Token",
+                "value": "<calculated when request is sent>",
+                "system": true,
+                "type": "text",
+                "id": 2
+              },
+              {
+                "name": "content-type",
+                "sortOrder": 4,
+                "infoTitle": "This header was automatically added",
+                "info": "The Content-Type header is added to help the server identify the media type of the request body that is present in this request.\n\nUse the request body tab to control the value or to remove this header.",
+                "allowedToToggle": true,
+                "disableEdit": true,
+                "previewSettingsLink": "Go to body",
+                "key": "Content-Type",
+                "value": "application/json",
+                "system": true,
+                "type": "text",
+                "id": 3,
+                "disabled": true
+              },
+              {
+                "name": "content-length",
+                "sortOrder": 5,
+                "infoTitle": "This header was automatically added",
+                "info": "The Content-Length header was added to indicate to the server the size of the request body that is added to this request. Server uses this value to parse the request body accurately.\n\nYou can remove the header or enter a new one with a different value.",
+                "allowedToToggle": true,
+                "disableEdit": true,
+                "previewSettingsLink": "Go to body",
+                "key": "Content-Length",
+                "value": "<calculated when request is sent>",
+                "system": true,
+                "type": "text",
+                "id": 4,
+                "disabled": true
+              },
+              {
+                "name": "host",
+                "sortOrder": 6,
+                "infoTitle": "We recommend using this header",
+                "info": "The Host header is added to identify the domain name for which a request is being sent to the server. This header is implicitly sent by every HTTP client.\n\nYou can remove the header or enter a new one with a different value. It is most likely that without this header, your request will return an HTTP 400 error.",
+                "allowedToToggle": true,
+                "disableEdit": true,
+                "key": "Host",
+                "value": "<calculated when request is sent>",
+                "system": true,
+                "type": "text",
+                "id": 5,
+                "disabled": true
+              },
+              {
+                "name": "user-agent",
+                "sortOrder": 7,
+                "infoTitle": "We recommend using this header",
+                "info": "The User-Agent header is added to help the server identify Postman as the HTTP requesting application or client.\n\nIt is recommended that this header be sent, but you can remove the header or enter a new one with a different value.",
+                "allowedToToggle": true,
+                "disableEdit": true,
+                "key": "User-Agent",
+                "value": "PostmanRuntime/7.39.1",
+                "system": true,
+                "type": "text",
+                "id": 6,
+                "disabled": true
+              },
+              {
+                "name": "accept",
+                "sortOrder": 8,
+                "infoTitle": "We recommend using this header",
+                "info": "The \"Accept: */*\" header is added to tell the server that Postman can understand and process all forms of response content types.\n\nIt is recommended that this header be sent, but you can remove the header or enter a new one with a different value.",
+                "allowedToToggle": true,
+                "disableEdit": true,
+                "key": "Accept",
+                "value": "*/*",
+                "system": true,
+                "type": "text",
+                "id": 7,
+                "disabled": true
+              },
+              {
+                "name": "accept-encoding",
+                "sortOrder": 9,
+                "infoTitle": "We recommend using this header",
+                "info": "The Accept-Encoding header is added to indicate to the server that Postman HTTP client supports a defined list of content-encoding or compression algorithms as response.\n\nYou can remove the header or enter a new one with a different value. Doing that may not accurately render the response within the app.",
+                "allowedToToggle": true,
+                "disableEdit": true,
+                "key": "Accept-Encoding",
+                "value": "gzip, deflate, br",
+                "system": true,
+                "type": "text",
+                "id": 8,
+                "disabled": true
+              },
+              {
+                "name": "connection",
+                "sortOrder": 10,
+                "infoTitle": "We recommend using this header",
+                "info": "Postman added the Connection header to indicate the server to keep the underlying network connection open once the current response is received. This allows Postman to reuse the same connection for faster response times in subsequent requests to the same server.\n\nYou can remove this header or enter a new one with a different value, such as `Connection: Close` to control this behaviour.",
+                "allowedToToggle": true,
+                "disableEdit": true,
+                "key": "Connection",
+                "value": "keep-alive",
+                "system": true,
+                "type": "text",
+                "id": 9,
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"usuarioteste1224@email.com\",\n    \"password\": \"12345679\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3333/api/auth/signup",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3333",
+              "path": [
+                "api",
+                "auth",
+                "signup"
+              ]
+            },
+            "description": "- Endpoint público, não requer autenticação.\n    \n- Cria o usuário com role USER por padrão.\n    \n- Retorna dados do usuário e token de acesso.\n    \n- O token deve ser usado nas rotas autenticadas.\n    \n\n---\n\n| Request Body | Rules |\n| --- | --- |\n| `email` | obrigatório, válido e único |\n| `password` | obrigatório, entre 8 e 32 caracteres |\n\n---\n\n**200 Ok**\n\n``` json\n{\n  \"user\": {\n    \"id\": 1,\n    \"email\": \"usuario@email.com\",\n    \"createdAt\": \"2025-03-10T00:00:00.000Z\",\n    \"updatedAt\": \"2025-03-10T00:00:00.000Z\"\n  },\n  \"token\": \"oat_MTg.V2Fnc2Zmb2...\"\n}\n\n ```\n\n**422 Validation Error**\n\n``` json\n{\n  \"message\": \"Validation error\",\n  \"errors\": [\n    { \"field\": \"email\", \"message\": \"The email has already been taken\" },\n    { \"field\": \"password\", \"message\": \"The password must be at least 8 characters\" }\n  ]\n}\n\n ```"
+          },
+          "response": []
+        },
+        {
+          "name": "auth/login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"admin@betalent.com\",\n    \"password\": \"admin123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3333/api/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3333",
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "- Endpoint público, não requer autenticação.\n    \n- Autentica o usuário com email e senha.\n    \n- Retorna dados do usuário e token de acesso.\n    \n- O token deve ser usado nas rotas autenticadas.\n    \n\n---\n\n| Request Body | Rules |\n| --- | --- |\n| `email` | obrigatório, formato de email válido |\n| `password` | obrigatório |\n\n---\n\n**200 Ok**\n\n``` json\n{\n  \"data\": {\n    \"user\": {\n      \"id\": 1,\n      \"email\": \"usuario@email.com\",\n      \"createdAt\": \"2026-03-13T01:24:20.521+00:00\",\n      \"updatedAt\": \"2026-03-13T01:24:20.521+00:00\"\n    },\n    \"token\": \"oat_Mjc.ZmRs...\"\n  }\n}\n\n ```\n\n**401 Unauthorized**\n\n``` json\n{\n  \"message\": \"Unauthorized\"\n}\n\n ```\n\n**422 Validation Error**\n\n``` json\n{\n  \"message\": \"Validation error\",\n  \"errors\": [\n    { \"field\": \"email\", \"message\": \"The email field must be a valid email address\" },\n    { \"field\": \"password\", \"message\": \"The password field must be defined\" }\n  ]\n}\n\n ```"
+          },
+          "response": []
+        },
+        {
+          "name": "auth/profile",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "oat_Mzc.NEhYalZaOE5sbEc0WnhRSGRSbDB3S1dGM3dOOVRCNk5RVWVfMlQ0RzQwODUwNzk2Nzc",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3333/api/auth/profile",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3333",
+              "path": [
+                "api",
+                "auth",
+                "profile"
+              ]
+            },
+            "description": "- Endpoint privado, requer autenticação.\n    \n- Retorna os dados do usuário autenticado.\n    \n\n---\n\n**200 Ok**\n\n``` json\n{\n    \"data\": {\n        \"id\": 1,\n        \"email\": \"admin@betalent.com\",\n        \"createdAt\": \"2026-03-11T03:35:22.000+00:00\",\n        \"updatedAt\": \"2026-03-11T03:35:22.000+00:00\"\n    }\n}\n\n ```\n\n**401 Unauthorized**\n\n``` json\n{\n  \"message\": \"Unauthorized\"\n}\n\n ```"
+          },
+          "response": []
+        },
+        {
+          "name": "auth/logout",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "oat_MzM.bEF6VE5BeUVTUjFNSzN2a0lkeUJPaERhREgyMnNna01sMThib3J0dzM2ODYzMjA0MjU",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "text"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3333/api/auth/logout",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3333",
+              "path": [
+                "api",
+                "auth",
+                "logout"
+              ]
+            },
+            "description": "- Endpoint privado, requer autenticação.\n    \n- Revoga o token de acesso do uruário autenticado\n    \n\n---\n\n**200 OK**\n\n``` json\n{\n  \"message\": \"Logged out\"\n}\n\n ```\n\n**401 Unauthorized**\n\n``` json\n{\n  \"message\": \"Unauthorized\"\n}\n\n ```"
+          },
+          "response": []
+        }
+      ],
+      "description": "**Base URL:** `http://localhost:3333/api`\n\n---\n\nRotas Públicas — não requerem autenticação.\n\n| Método | Rota | Descrição |\n| --- | --- | --- |\n| POST | `/auth/signup` | Cria uma nova conta com role USER |\n| POST | `/auth/login` | Autentica e retorna o Bearer token |\n\nRotas Privadas — requerem `Authorization: Bearer {token}` no header.\n\n| Método | Rota | Descrição |\n| --- | --- | --- |\n| GET | `/auth/profile` | Retorna os dados do usuário autenticado |\n| DELETE | `/auth/logout` | Revoga o token do usuário autenticado |"
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "users",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "oat_NjY.MVFnM3BWR3RqeDJmQ05oTUxNdjhjQ2ZTMGJ3bXdkdXhHZE03cVh2Qzk5MjQ4NjMy",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"newuser22@betalent.com\",\n    \"password\": \"senha12345\",\n    \"role\": \"FINANCE\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3333/api/users",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3333",
+              "path": [
+                "api",
+                "users"
+              ]
+            },
+            "description": "- Endpoint privado, requer autenticação.\n    \n- Lista todos os usuários cadastrados.\n    \n- Roles permitidas: ADMIN, MANAGER.\n    \n\n---\n\n| Request Body | Rules |\n| --- | --- |\n| `email` | obrigatório, válido e único |\n| `password` | obrigatório, entre 8 e 32 caracteres |\n| `role` | obrigatório, enum: ADMIN, MANAGER, FINANCE, USER |\n\n---\n\n**200 OK**\n\n``` json\n{\n  \"data\": [\n    {\n      \"id\": 51,\n      \"email\": \"admin@betalent.com\",\n      \"role\": \"ADMIN\",\n      \"createdAt\": \"2026-03-13T17:33:02.000+00:00\",\n      \"updatedAt\": \"2026-03-13T20:14:07.000+00:00\"\n    },\n    {\n      \"id\": 53,\n      \"email\": \"manager@betalent.com\",\n      \"role\": \"MANAGER\",\n      \"createdAt\": \"2026-03-13T20:14:07.000+00:00\",\n      \"updatedAt\": \"2026-03-13T20:14:07.000+00:00\"\n    }\n  ]\n}\n\n ```\n\n**401 Unauthorized**\n\n``` json\n{ \"message\": \"Unauthorized\" }\n\n ```\n\n**403 Forbidden**\n\n``` json\n{ \"message\": \"Access denied\" }\n\n ```"
+          },
+          "response": []
+        },
+        {
+          "name": "users",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "oat_NjU.RkdkUmRLMFp3QzZUSHdHOFJqd1RXbmg5TUNkNnpxM1p2c2Uxc192QjM0OTEyMzA0MjQ",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3333/api/users",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3333",
+              "path": [
+                "api",
+                "users"
+              ]
+            },
+            "description": "- Endpoint privado, requer autenticação.\n    \n- Lista todos os usuários cadastrados.\n    \n- Roles permitidas: ADMIN, MANAGER.\n    \n\n---\n\n**200 OK**\n\n``` json\n{\n  \"data\": [\n    {\n      \"id\": 51,\n      \"email\": \"admin@betalent.com\",\n      \"role\": \"ADMIN\",\n      \"createdAt\": \"2026-03-13T17:33:02.000+00:00\",\n      \"updatedAt\": \"2026-03-13T20:14:07.000+00:00\"\n    },\n    {\n      \"id\": 53,\n      \"email\": \"manager@betalent.com\",\n      \"role\": \"MANAGER\",\n      \"createdAt\": \"2026-03-13T20:14:07.000+00:00\",\n      \"updatedAt\": \"2026-03-13T20:14:07.000+00:00\"\n    }\n  ]\n}\n\n ```\n\n**401 Unauthorized**\n\n``` json\n{ \"message\": \"Unauthorized\" }\n\n ```\n\n**403 Forbidden**  \n\n``` json\n{ \"message\": \"Access denied\" }\n\n ```"
+          },
+          "response": []
+        },
+        {
+          "name": "users/:id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "oat_NjU.RkdkUmRLMFp3QzZUSHdHOFJqd1RXbmg5TUNkNnpxM1p2c2Uxc192QjM0OTEyMzA0MjQ",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3333/api/users/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3333",
+              "path": [
+                "api",
+                "users",
+                "1"
+              ]
+            },
+            "description": "- Endpoint privado, requer autenticação.\n    \n- Retorna os detalhes de um usuário pelo ID.\n    \n- Roles permitidas: ADMIN, MANAGER.\n    \n\n---\n\n**200 OK**\n\n``` json\n{\n  \"data\": {\n    \"id\": 1,\n    \"email\": \"admin@betalent.com\",\n    \"role\": \"ADMIN\",\n    \"createdAt\": \"2026-03-13T01:24:20.521+00:00\",\n    \"updatedAt\": \"2026-03-13T01:24:20.521+00:00\"\n  }\n}\n\n ```\n\n**401 Unauthorized**\n\n``` json\n{ \"message\": \"Unauthorized\" }\n\n ```\n\n**403 Forbidden**  \n\n``` json\n{ \"message\": \"Access denied\" }\n\n ```\n\n**404 Not Found**  \n\n``` json\n{ \"message\": \"Resource not found\" }\n\n ```"
+          },
+          "response": []
+        },
+        {
+          "name": "users/:id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "oat_Njc.YTY5QTJHbkRsOVVkWGJ1NUY5bklfVnZxa3piSlhzdFZhdEZyZ0xEaTQxNzIyNzAzNw",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"role\": \"MANAGER\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3333/api/users/55",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3333",
+              "path": [
+                "api",
+                "users",
+                "55"
+              ]
+            },
+            "description": "- Endpoint privado, requer autenticação.\n    \n- Atualiza os dados de um usuário existente. Todos os campos são opcionais.\n    \n- Roles permitidas: ADMIN, MANAGER.\n    \n\n---\n\n| Request Body | Rules |\n| --- | --- |\n| `email` | opcional, válido e único |\n| `password` | opcional, entre 8 e 32 caracteres |\n| `role` | opcional, enum: ADMIN, MANAGER, FINANCE, USER |\n\n---\n\n**200 OK**\n\n``` json\n{\n  \"data\": {\n    \"id\": 5,\n    \"email\": \"finance@betalent.com\",\n    \"role\": \"MANAGER\",\n    \"createdAt\": \"2026-03-13T01:24:20.521+00:00\",\n    \"updatedAt\": \"2026-03-13T01:24:20.521+00:00\"\n  }\n}\n\n ```\n\n**401 Unauthorized**\n\n``` json\n{ \"message\": \"Unauthorized\" }\n\n ```\n\n**403 Forbidden**\n\n``` json\n{ \"message\": \"Access denied\" }\n\n ```\n\n**404 Not Found**\n\n``` json\n{ \"message\": \"Resource not found\" }\n\n ```"
+          },
+          "response": []
+        },
+        {
+          "name": "users/:id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "oat_Njc.YTY5QTJHbkRsOVVkWGJ1NUY5bklfVnZxa3piSlhzdFZhdEZyZ0xEaTQxNzIyNzAzNw",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3333/api/users/55",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3333",
+              "path": [
+                "api",
+                "users",
+                "55"
+              ]
+            },
+            "description": "`DELETE /users/:id`\n\n- Endpoint privado, requer autenticação.\n    \n- Remove um usuário pelo ID.\n    \n- Roles permitidas: ADMIN, MANAGER.\n    \n\n---\n\n**200 OK**\n\n``` json\n{ \"message\": \"User deleted successfully\" }\n\n ```\n\n**401 Unauthorized**\n\n``` json\n{ \"message\": \"Unauthorized\" }\n\n ```\n\n**403 Forbidden**\n\n``` json\n{ \"message\": \"Access denied\" }\n\n ```\n\n**404 Not Found**\n\n``` json\n{ \"message\": \"Resource not found\" }\n\n ```"
+          },
+          "response": []
+        }
+      ],
+      "description": "Rotas Privadas — requerem `Authorization: Bearer {token}` no header.\n\n| Método | Rota | Descrição | Roles |\n| --- | --- | --- | --- |\n| GET | `/users` | Lista todos os usuários | ADMIN, MANAGER |\n| GET | `/users/:id` | Retorna os detalhes de um usuário | ADMIN, MANAGER |\n| POST | `/users` | Cria um novo usuário com role | ADMIN, MANAGER |\n| PUT | `/users/:id` | Atualiza um usuário existente | ADMIN, MANAGER |\n| DELETE | `/users/:id` | Remove um usuário | ADMIN, MANAGER |"
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "products",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "oat_Njg.SUdWTjVwWEhiM3k5M29LNWM0NXF1amNWOFRkc3BNdjhsZFJVVnlCRTMzMTY5ODEwMDY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3333/api/products",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3333",
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "- Endpoint privado, requer autenticação.\n    \n- Lista todos os produtos ordenados por nome.\n    \n- Roles permitidas: ADMIN, MANAGER, FINANCE.\n    \n\n---\n\n**200 OK**\n\n``` json\n{\n  \"data\": [\n    { \"id\": 1, \"name\": \"Plano Basic\", \"amount\": 4990, \"createdAt\": \"...\", \"updatedAt\": \"...\" },\n    { \"id\": 2, \"name\": \"Plano Pro\", \"amount\": 9990, \"createdAt\": \"...\", \"updatedAt\": \"...\" }\n  ]\n}\n\n ```\n\n**401 Unauthorized**\n\n``` json\n{ \"message\": \"Unauthorized\" }\n\n ```\n\n**403 Forbidden**\n\n``` json\n{ \"message\": \"Access denied\" }\n\n ```"
+          },
+          "response": []
+        },
+        {
+          "name": "products/:id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "oat_Mzg.U1NwLTZjRExacDNLMmRLZzhxRGlSd3QzWEJFVVVqeW9RUnh4LS1oRTMzMDUwNTI5MzM",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3333/api/products/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3333",
+              "path": [
+                "api",
+                "products",
+                "2"
+              ]
+            },
+            "description": "- Endpoint privado, requer autenticação.\n    \n- Retorna os detalhes de um produto pelo ID.\n    \n- Roles permitidas: ADMIN, MANAGER, FINANCE.\n    \n\n---\n\n**200 OK**\n\n``` json\n{\n  \"data\": {\n    \"id\": 1,\n    \"name\": \"Plano Basic\",\n    \"amount\": 4990,\n    \"createdAt\": \"2026-03-13T01:24:20.521+00:00\",\n    \"updatedAt\": \"2026-03-13T01:24:20.521+00:00\"\n  }\n}\n\n ```\n\n**401 Unauthorized**\n\n``` json\n{ \"message\": \"Unauthorized\" }\n\n ```\n\n**403 Forbidden**\n\n``` json\n{ \"message\": \"Access denied\" }\n\n ```\n\n**404 Not Found**\n\n``` json\n{ \"message\": \"Resource not found\" }\n\n ```"
+          },
+          "response": []
+        },
+        {
+          "name": "products",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "oat_Mzg.U1NwLTZjRExacDNLMmRLZzhxRGlSd3QzWEJFVVVqeW9RUnh4LS1oRTMzMDUwNTI5MzM",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"name\": \"Plano Pro 22 Super\", \"amount\": 993000 }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3333/api/products",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3333",
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "- Endpoint privado, requer autenticação.\n    \n- Cria um novo produto. O `amount` deve ser informado em centavos.\n    \n- Roles permitidas: ADMIN, MANAGER, FINANCE.\n    \n\n---\n\n| Request Body | Rules |\n| --- | --- |\n| `name` | obrigatório, entre 3 e 255 caracteres, único |\n| `amount` | obrigatório, inteiro positivo em centavos, sem decimais |\n\n---\n\n**200 OK**\n\n``` json\n{\n  \"data\": {\n    \"id\": 3,\n    \"name\": \"Plano Pro\",\n    \"amount\": 9990,\n    \"createdAt\": \"2026-03-13T01:24:20.521+00:00\",\n    \"updatedAt\": \"2026-03-13T01:24:20.521+00:00\"\n  }\n}\n\n ```\n\n**401 Unauthorized**\n\n``` json\n{ \"message\": \"Unauthorized\" }\n\n ```\n\n**403 Forbidden**\n\n``` json\n{ \"message\": \"Access denied\" }\n\n ```\n\n**422 Validator Error**\n\n``` json\n{\n  \"message\": \"Validation error\",\n  \"errors\": [\n    { \"field\": \"name\", \"message\": \"The name has already been taken\" },\n    { \"field\": \"amount\", \"message\": \"The amount field must be an integer\" }\n  ]\n}\n\n ```"
+          },
+          "response": []
+        },
+        {
+          "name": "products/:id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "oat_Mzg.U1NwLTZjRExacDNLMmRLZzhxRGlSd3QzWEJFVVVqeW9RUnh4LS1oRTMzMDUwNTI5MzM",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"names\": \"Mudei o n\" }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3333/api/products/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3333",
+              "path": [
+                "api",
+                "products",
+                "1"
+              ]
+            },
+            "description": "- Endpoint privado, requer autenticação.\n    \n- Atualiza os dados de um produto existente. Todos os campos são opcionais.\n    \n- Roles permitidas: ADMIN, MANAGER, FINANCE\n    \n\n---\n\n| Request Body | Rules |\n| --- | --- |\n| `name` | opcional, entre 3 e 255 caracteres, único |\n| `amount` | opcional, inteiro positivo em centavos, sem decimais |\n\n---\n\n**200 OK**\n\n``` json\n{\n  \"data\": {\n    \"id\": 1,\n    \"name\": \"Plano Pro Plus\",\n    \"amount\": 9990,\n    \"createdAt\": \"2026-03-13T01:24:20.521+00:00\",\n    \"updatedAt\": \"2026-03-13T01:24:20.521+00:00\"\n  }\n}\n\n ```\n\n**401 Unauthorized**\n\n``` json\n{ \"message\": \"Unauthorized\" }\n\n ```\n\n**403 Forbidden**\n\n``` json\n{ \"message\": \"Access denied\" }\n\n ```\n\n**404 Not Found**\n\n``` json\n{ \"message\": \"Resource not found\" }\n\n ```"
+          },
+          "response": []
+        },
+        {
+          "name": "products/:id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3333/api/products/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3333",
+              "path": [
+                "api",
+                "products",
+                "1"
+              ]
+            },
+            "description": "- Endpoint privado, requer autenticação.\n    \n- Remove um produto pelo ID.\n    \n- Roles permitidas: ADMIN, MANAGER, FINANCE.\n    \n\n---\n\n**204 No Content**\n\n\\-\n\n**401 Unauthorized**\n\n``` json\n{ \"message\": \"Unauthorized\" }\n\n ```\n\n**403 Forbidden**\n\n``` json\n{ \"message\": \"Access denied\" }\n\n ```\n\n**404 Not Found**\n\n``` json\n{ \"message\": \"Resource not found\" }\n\n ```"
+          },
+          "response": []
+        }
+      ],
+      "description": "Rotas Privadas — requerem `Authorization: Bearer {token}` no header.\n\n| Método | Rota | Descrição | Roles |\n| --- | --- | --- | --- |\n| GET | `/products` | Lista todos os produtos | ADMIN, MANAGER, FINANCE |\n| GET | `/products/:id` | Retorna os detalhes de um produto | ADMIN, MANAGER, FINANCE |\n| POST | `/products` | Cria um novo produto | ADMIN, MANAGER, FINANCE |\n| PUT | `/products/:id` | Atualiza um produto existente | ADMIN, MANAGER, FINANCE |\n| DELETE | `/products/:id` | Remove um produto | ADMIN, MANAGER, FINANCE |"
+    },
+    {
+      "name": "Transactions",
+      "item": [
+        {
+          "name": "purchases",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"products\": [\n        {\n            \"id\": 25,\n            \"quantity\": 100\n        },\n        {\n            \"id\": 26,\n            \"quantity\": 1\n        }\n    ],\n    \"client\": {\n        \"name\": \"João Silva\",\n        \"email\": \"joao@email.com\"\n    },\n    \"cardNumber\": \"5569000000006063\",\n    \"cvv\": \"010\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3333/api/purchases",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3333",
+              "path": [
+                "api",
+                "purchases"
+              ]
+            },
+            "description": "- Endpoint público, não requer autenticação.\n    \n- Realiza uma compra. Tenta o gateway de maior prioridade e faz fallback automático.\n    \n- O cliente é criado automaticamente se não existir.\n    \n\n---\n\n| Request Body | Rules |\n| --- | --- |\n| `products` | obrigatório, array com ao menos 1 item |\n| `products[].id` | obrigatório, ID de produto existente |\n| `products[].quantity` | obrigatório, inteiro positivo |\n| `client.name` | obrigatório |\n| `client.email` | obrigatório, email válido |\n| `cardNumber` | obrigatório, exatamente 16 dígitos numéricos |\n| `cvv` | obrigatório, exatamente 3 dígitos numéricos |\n\n---\n\n**200 OK**\n\n``` json\n{\n  \"data\": {\n    \"id\": 1,\n    \"externalId\": \"0e9d4f09-0241-4a6e-84e8-b67b4733996e\",\n    \"status\": \"pending\",\n    \"amount\": 508990,\n    \"cardLastNumbers\": \"6063\",\n    \"createdAt\": \"2026-03-13T20:57:30.000+00:00\",\n    \"updatedAt\": \"2026-03-13T20:57:30.000+00:00\",\n    \"client\": {\n      \"id\": 3,\n      \"name\": \"João Silva\",\n      \"email\": \"joao@email.com\"\n    },\n    \"gateway\": {\n      \"id\": 1,\n      \"name\": \"Gateway 1\"\n    },\n    \"products\": [\n      { \"id\": 25, \"name\": \"Plano Basic\", \"amount\": 4990, \"quantity\": 100 },\n      { \"id\": 26, \"name\": \"Plano Pro\", \"amount\": 9990, \"quantity\": 1 }\n    ]\n  }\n}\n\n ```\n\n**400 Bad Request**\n\n``` json\n{ \"message\": \"One or more products not found\" }\n\n ```\n\n**400 Bad Request**\n\n``` json\n{ \"message\": \"All gateways failed\" }\n\n ```\n\n**422 Validation Error**\n\n``` json\n{\n  \"message\": \"Validation error\",\n  \"errors\": [\n    { \"field\": \"cardNumber\", \"message\": \"The cardNumber must be exactly 16 digits\" },\n    { \"field\": \"cvv\", \"message\": \"The cvv must be exactly 3 digits\" }\n  ]\n}\n\n ```"
+          },
+          "response": []
+        },
+        {
+          "name": "transactions",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "oat_Njg.SUdWTjVwWEhiM3k5M29LNWM0NXF1amNWOFRkc3BNdjhsZFJVVnlCRTMzMTY5ODEwMDY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3333/api/transactions",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3333",
+              "path": [
+                "api",
+                "transactions"
+              ]
+            },
+            "description": "- Endpoint privado, requer autenticação.\n    \n- Lista todas as transações com cliente e gateway. Ordenadas por data decrescente.\n    \n- Relos permitdas; ADMIN, MANAGER, FINANCE.\n    \n\n---\n\n**200 OK**\n\n``` json\n{\n  \"data\": [\n    {\n      \"id\": 1,\n      \"externalId\": \"0e9d4f09-0241-4a6e-84e8-b67b4733996e\",\n      \"status\": \"paid\",\n      \"amount\": 9990,\n      \"cardLastNumbers\": \"6063\",\n      \"createdAt\": \"2026-03-13T20:57:30.000+00:00\",\n      \"updatedAt\": \"2026-03-13T20:57:30.000+00:00\",\n      \"client\": { \"id\": 1, \"name\": \"João Silva\", \"email\": \"joao@email.com\" },\n      \"gateway\": { \"id\": 1, \"name\": \"Gateway 1\" }\n    }\n  ]\n}\n\n ```\n\n**401 Unauthorized**\n\n``` json\n{ \"message\": \"Unauthorized\" }\n\n ```\n\n**403 Forbidden**\n\n``` json\n{ \"message\": \"Access denied\" }\n\n ```"
+          },
+          "response": []
+        },
+        {
+          "name": "transactions/:id",
+          "request": {
+            "auth": {
+              "type": "inherit"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3333/api/transactions/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3333",
+              "path": [
+                "api",
+                "transactions",
+                "1"
+              ]
+            },
+            "description": "- Endpoint privado, requer autenticação.\n    \n- Retorna os detalhes de uma transação com cliente, gateway e produtos.\n    \n- Roles permitidas: ADMIN, MANAGER, FINANCE.\n    \n\n---\n\n**200 OK**\n\n``` json\n{\n  \"data\": {\n    \"id\": 1,\n    \"externalId\": \"0e9d4f09-0241-4a6e-84e8-b67b4733996e\",\n    \"status\": \"paid\",\n    \"amount\": 9990,\n    \"cardLastNumbers\": \"6063\",\n    \"createdAt\": \"2026-03-13T20:57:30.000+00:00\",\n    \"updatedAt\": \"2026-03-13T20:57:30.000+00:00\",\n    \"client\": { \"id\": 1, \"name\": \"João Silva\", \"email\": \"joao@email.com\" },\n    \"gateway\": { \"id\": 1, \"name\": \"Gateway 1\" },\n    \"products\": [\n      { \"id\": 1, \"name\": \"Plano Basic\", \"amount\": 4990, \"quantity\": 2 }\n    ]\n  }\n}\n\n ```\n\n**401 Unauthorized**\n\n``` json\n{ \"message\": \"Unauthorized\" }\n\n ```\n\n**403 Forbidden**\n\n``` json\n{ \"message\": \"Access denied\" }\n\n ```\n\n**404 Not Found**\n\n``` json\n{ \"message\": \"Resource not found\" }\n\n ```"
+          },
+          "response": []
+        },
+        {
+          "name": "transactions/:id/refund",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "oat_Njg.SUdWTjVwWEhiM3k5M29LNWM0NXF1amNWOFRkc3BNdjhsZFJVVnlCRTMzMTY5ODEwMDY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3333/api/transactions/1/refund",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3333",
+              "path": [
+                "api",
+                "transactions",
+                "1",
+                "refund"
+              ]
+            },
+            "description": "- Endpoint privado, requer autenticação.\n    \n- Realiza o reembolso de uma transação pelo gateway de origem.\n    \n- Não é possível reembolsar uma transação já reembolsada.\n    \n- Roles permitidas: ADMIN, FINANCE.\n    \n\n---\n\n**200 OK**\n\n``` json\n{\n  \"data\": {\n    \"id\": 1,\n    \"status\": \"refunded\",\n    \"amount\": 9990,\n    \"cardLastNumbers\": \"6063\",\n    \"createdAt\": \"2026-03-13T20:57:30.000+00:00\",\n    \"updatedAt\": \"2026-03-13T21:10:00.000+00:00\"\n  }\n}\n\n ```\n\n**400 Bad Request**\n\n``` json\n{ \"message\": \"Transaction already refunded\" }\n\n ```\n\n**401 Unauthorized**\n\n``` json\n{ \"message\": \"Unauthorized\" }\n\n ```\n\n**403 Forbidden**\n\n``` json\n{ \"message\": \"Access denied\" }\n\n ```\n\n**404 Not Found**\n\n``` json\n{ \"message\": \"Resource not found\" }\n\n ```"
+          },
+          "response": []
+        }
+      ],
+      "description": "| Método | Rota | Auth | Descrição |\n| --- | --- | --- | --- |\n| POST | `/purchases` | Público | Realizar uma compra |\n| GET | `/transactions` | ADMIN, MANAGER, FINANCE | Listar todas as transações |\n| GET | `/transactions/:id` | ADMIN, MANAGER, FINANCE | Detalhe de uma transação |\n| POST | `/transactions/:id/refund` | ADMIN, FINANCE | Reembolsar uma transação |"
+    },
+    {
+      "name": "Clients",
+      "item": [
+        {
+          "name": "clients",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "oat_Njg.SUdWTjVwWEhiM3k5M29LNWM0NXF1amNWOFRkc3BNdjhsZFJVVnlCRTMzMTY5ODEwMDY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3333/api/clients",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3333",
+              "path": [
+                "api",
+                "clients"
+              ]
+            },
+            "description": "- Endpoint privado, requer autenticação.\n    \n- Lista todos os clientes cadastrados.\n    \n- Roles permitidas: ADMIN, MANAGER, FINANCE.\n    \n\n---\n\n**200 OK**\n\n``` json\n{\n  \"data\": [\n    {\n      \"id\": 1,\n      \"name\": \"João Silva\",\n      \"email\": \"joao@email.com\",\n      \"createdAt\": \"2026-03-13T20:57:30.000+00:00\",\n      \"updatedAt\": \"2026-03-13T20:57:30.000+00:00\"\n    }\n  ]\n}\n\n ```\n\n**401 Unauthorized**\n\n``` json\n{ \"message\": \"Unauthorized\" }\n\n ```\n\n**403 Forbidden**\n\n``` json\n{ \"message\": \"Access denied\" }\n\n ```"
+          },
+          "response": []
+        },
+        {
+          "name": "clients/:id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "oat_NzE.c1dXdUVJM3ZMTHppbXBJaEJYMHYwc0QzVnFYRHFERmhVbmFvUjJjajM4MTUzOTUzMDc",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3333/api/clients/3",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3333",
+              "path": [
+                "api",
+                "clients",
+                "3"
+              ]
+            },
+            "description": "- Endpoint privado, requer autenticação.\n    \n- Retorna os dados do cliente e todas as suas transações.\n    \n- Roles permitidas: ADMIN, MANAGER, FINANCE.\n    \n\n---\n\n**200 OK**\n\n``` json\n{\n  \"data\": {\n    \"id\": 1,\n    \"name\": \"João Silva\",\n    \"email\": \"joao@email.com\",\n    \"createdAt\": \"2026-03-13T20:57:30.000+00:00\",\n    \"updatedAt\": \"2026-03-13T20:57:30.000+00:00\",\n    \"transactions\": [\n      {\n        \"id\": 1,\n        \"status\": \"paid\",\n        \"amount\": 9990,\n        \"cardLastNumbers\": \"6063\",\n        \"createdAt\": \"2026-03-13T20:57:30.000+00:00\"\n      }\n    ]\n  }\n}\n\n ```\n\n**401 Unauthorized**\n\n``` json\n{ \"message\": \"Unauthorized\" }\n\n ```\n\n**403 Forbidden**\n\n``` json\n{ \"message\": \"Access denied\" }\n\n ```\n\n**404 Not Found**\n\n``` json\n{ \"message\": \"Resource not found\" }\n\n ```"
+          },
+          "response": []
+        }
+      ],
+      "description": "Rotas Privadas — requerem `Authorization: Bearer {token}` no header.\n\n| Método | Rota | Descrição | Roles |\n| --- | --- | --- | --- |\n| GET | `/clients` | Lista todos os clientes | ADMIN, MANAGER, FINANCE |\n| GET | `/clients/:id` | Retorna o cliente e suas transações | ADMIN, MANAGER, FINANCE |\n\n> &lt;p &gt;Clientes são criados automaticamente ao realizar uma compra. Não há rota de criação manual.&lt;/p&gt;"
+    },
+    {
+      "name": "Gateways",
+      "item": [
+        {
+          "name": "/gateways/:id/toggle",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "oat_NzM.YTRrNHNnT2FMX0k4Vk1ReVpYMWhzN0tXdmc5OEpud29qUTdKdWduVjE0NDk4NjUzNjM",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3333/api/gateways/1/toggle",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3333",
+              "path": [
+                "api",
+                "gateways",
+                "1",
+                "toggle"
+              ]
+            },
+            "description": "- Endpoint privado, requer autenticação.\n    \n- Ativa ou desativa um gateway. Alterna o status `isActive` atual.\n    \n- Gateways inativos são ignorados no fluxo de pagamento.\n    \n- Roles permitidas: ADMIN.\n    \n\n---\n\n**200 OK**\n\n``` json\n{\n  \"data\": {\n    \"id\": 1,\n    \"name\": \"Gateway 1\",\n    \"isActive\": false,\n    \"priority\": 1,\n    \"createdAt\": \"2026-03-13T01:24:20.521+00:00\",\n    \"updatedAt\": \"2026-03-14T02:00:00.000+00:00\"\n  }\n}\n\n ```\n\n**401 Unauthorized**\n\n``` json\n{ \"message\": \"Unauthorized\" }\n\n ```\n\n**403 Forbidde**\n\n``` json\n{ \"message\": \"Access denied\" }\n\n ```\n\n**404 Not Found**\n\n``` json\n{ \"message\": \"Resource not found\" }\n\n ```"
+          },
+          "response": []
+        },
+        {
+          "name": "gateways/:id/priority",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "oat_NzM.YTRrNHNnT2FMX0k4Vk1ReVpYMWhzN0tXdmc5OEpud29qUTdKdWduVjE0NDk4NjUzNjM",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"priority\": 7\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3333/api/gateways/1/priority",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3333",
+              "path": [
+                "api",
+                "gateways",
+                "1",
+                "priority"
+              ]
+            },
+            "description": "- Endpoint privado, requer autenticação.\n    \n- Atualiza a prioridade de execução do gateway. Menor número = maior prioridade.\n    \n- O campo `priority` é único — não pode haver dois gateways com a mesma prioridade.\n    \n- Roles permitidas: ADMIN\n    \n\n---\n\n| Campo | Rules |\n| --- | --- |\n| `priority` | obrigatório, inteiro positivo, mínimo 1, único |\n\n---\n\n**200 OK**\n\n``` json\n{\n  \"data\": {\n    \"id\": 1,\n    \"name\": \"Gateway 1\",\n    \"isActive\": true,\n    \"priority\": 5,\n    \"createdAt\": \"2026-03-13T01:24:20.521+00:00\",\n    \"updatedAt\": \"2026-03-14T02:00:00.000+00:00\"\n  }\n}\n\n ```\n\n**401 Unauthorized**\n\n``` json\n{ \"message\": \"Unauthorized\" }\n\n ```\n\n**403 Forbidden**\n\n``` json\n{ \"message\": \"Access denied\" }\n\n ```\n\n**404 Not Found**\n\n``` json\n{ \"message\": \"Resource not found\" }\n\n ```\n\n**409 Conflict**\n\n``` json\n{ \"message\": \"Priority already in use\" }\n\n ```\n\n**422 Validation Error**\n\n``` json\n{\n  \"message\": \"Validation error\",\n  \"errors\": [\n    { \"field\": \"priority\", \"message\": \"The priority must be a positive number\" }\n  ]\n}\n\n ```"
+          },
+          "response": []
+        }
+      ],
+      "description": "Rotas Privadas — requerem `Authorization: Bearer {token}` no header.\n\n| Método | Rota | Descrição | Roles |\n| --- | --- | --- | --- |\n| PATCH | `/gateways/:id/toggle` | Ativa ou desativa um gateway | ADMIN |\n| PATCH | `/gateways/:id/priority` | Atualiza a prioridade de execução | ADMIN |\n\n---"
+    }
+  ]
+}
