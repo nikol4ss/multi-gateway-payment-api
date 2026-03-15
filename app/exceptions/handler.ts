@@ -31,6 +31,7 @@ export default class HttpExceptionHandler extends ExceptionHandler {
       })
     }
 
+    // 409 - prioridade já em uso
     if (error instanceof Error && error.message.includes('gateways_priority_unique')) {
       return ctx.response.conflict({ message: 'Priority already in use' })
     }
