@@ -1,10 +1,6 @@
 # Multi-Gateway Payment API
 
-Saudações, equipe **BeTalent**. Externo meu agradecimento pela oportunidade de participar
-deste processo seletivo.
-
-Implementei o Nível 3 da especificação. A API gerencia um fluxo completo de pagamentos:
-o cliente realiza uma compra informando múltiplos produtos com suas quantidades, o sistema
+API gerencia um fluxo completo de pagamentos:o cliente realiza uma compra informando múltiplos produtos com suas quantidades, o sistema
 calcula o valor total via back-end somando os produtos selecionados e tenta processar a
 cobrança pelo gateway de maior prioridade, fazendo fallback automático para o próximo em
 caso de falha. Se o cliente ainda não existir no banco, é criado automaticamente no momento
@@ -15,14 +11,6 @@ simples a adição de novos provedores no futuro. O acesso às rotas privadas é
 por roles (ADMIN, MANAGER, FINANCE, USER), transações podem ser reembolsadas pelo gateway
 de origem e o histórico completo de compras fica vinculado ao cliente. A infraestrutura
 roda inteiramente via Docker Compose com MySQL, aplicação e mock dos gateways.
-
-Já havia trabalhado com APIs de gateway de pagamento usando Fastify, mas não em um
-cenário multi-gateway com fallback automático, o que tornou esse teste especialmente
-interessante. A novidade foi o AdonisJS, framework que não fazia parte do meu stack e
-que definitivamente entrou nele após esse projeto. O que mais me impressionou foi a
-abordagem batteries-included: CLI, ORM (Lucid), validação (VineJS), serializers e testes
-integrados nativamente, sem necessidade de configurar ou acoplar peças separadas — um
-framework com muito mais recursos a explorar, e que certamente vou continuar estudando.
 
 ---
 
